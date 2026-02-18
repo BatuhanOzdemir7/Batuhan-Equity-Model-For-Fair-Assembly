@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <locale.h> // <- Türkçe karakterler ve yerel ayarlar için eklendi
+#include <locale.h> // <- TÃ¼rkÃ§e karakterler ve yerel ayarlar iÃ§in eklendi
 
 /*
- * TÜRKÇE KARAKTER NOTU:
- * Kod dosyasını UTF-8 olarak kaydedin.
- * Windows'ta konsolda düzgün görmek için programı çalıştırmadan önce
- * komut satırına "chcp 65001" yazmanız gerekebilir.
+ * TÃœRKÃ‡E KARAKTER NOTU:
+ * Kod dosyasÃ½nÃ½ UTF-8 olarak kaydedin.
+ * Windows'ta konsolda dÃ¼zgÃ¼n gÃ¶rmek iÃ§in programÃ½ Ã§alÃ½Ã¾tÃ½rmadan Ã¶nce
+ * komut satÃ½rÃ½na "chcp 65001" yazmanÃ½z gerekebilir.
 */
 
 
-// Tüm metinleri tutacak yapı (struct)
+// TÃ¼m metinleri tutacak yapÃ½ (struct)
 struct Strings {
-    // İlçe Adları (Verinin bir parçası)
+    // ÃlÃ§e AdlarÃ½ (Verinin bir parÃ§asÃ½)
     char* districtNames[6];
 
     // Genel
@@ -47,7 +47,7 @@ struct Strings {
     char* districtNoReps;
     char* systemJusticeScore;
 
-    // Nihai Karşılaştırma
+    // Nihai KarÃ¾Ã½laÃ¾tÃ½rma
     char* finalComparisonTitle;
     char* system1Score;
     char* system2Score;
@@ -56,46 +56,46 @@ struct Strings {
     char* resultSys2Better;
 };
 
-// --- TÜRKÇE METİNLER ---
-// Not: Türkçe karakterler düzeltildi (Ç, ı, ş, ğ)
+// --- TÃœRKÃ‡E METÃNLER ---
+// Not: TÃ¼rkÃ§e karakterler dÃ¼zeltildi (Ã‡, Ã½, Ã¾, Ã°)
 struct Strings TR = {
-    .districtNames = {"Merkez", "Çiftlikköy", "Çınarcık", "Altınova", "Armutlu", "Termal"},
+    .districtNames = {"Merkez", "Ã‡iftlikkÃ¶y", "Ã‡Ã½narcÃ½k", "AltÃ½nova", "Armutlu", "Termal"},
 
-    .title = "ADİL BİR MECLİS NASIL SAĞLANIR",
-    .subtitle = "Batuhan Hakkaniyet Modeli ile Güncel Kullanımdaki Saf D'Hondt Yönteminin Yalova örneği üzerinde pratikte bir karşılaştırması.",
-    .totalPopulation = "Toplam nüfus: \t\t\t%.0f\n\n",
-    .districtPopulation = "%-11s ilçesinin nüfusu:\t%.0f",
-    .populationRatio = "\t(Oranı: %% %.2f)\n",
-    .askForReps = "\nToplamda kaç vekil olmasını istiyorsunuz?: ",
-    .invalidChoice = "Geçersiz seçim. İngilizce ile devam ediliyor.\n",
+    .title = "ADÃL BÃR MECLÃS NASIL SAÃLANIR",
+    .subtitle = "Batuhan Hakkaniyet Modeli ile GÃ¼ncel KullanÃ½mdaki Saf D'Hondt YÃ¶nteminin Yalova Ã¶rneÃ°i Ã¼zerinde pratikte bir karÃ¾Ã½laÃ¾tÃ½rmasÃ½.",
+    .totalPopulation = "Toplam nÃ¼fus: \t\t\t%.0f\n\n",
+    .districtPopulation = "%-11s ilÃ§esinin nÃ¼fusu:\t%.0f",
+    .populationRatio = "\t(OranÃ½: %% %.2f)\n",
+    .askForReps = "\nToplamda kaÃ§ vekil olmasÃ½nÃ½ istiyorsunuz?: ",
+    .invalidChoice = "GeÃ§ersiz seÃ§im. Ãngilizce ile devam ediliyor.\n",
 
-    .system1Title = "SİSTEM 1: BATUHAN HAKKANİYET MODELİ",
-    .system1Subtitle1 = "İstediğiniz vekil sayısı: \t%d\nTaban olarak atanan vekil: \t%d",
-    .system1Subtitle2 = "Kalan %d vekil dağıtılıyor...\n\n",
-    .securityAssign = "(Güvenlik) İlk vekil en yüksek nüfusa atanıyor...\n",
-    .repAssigned = "%s ilçesine +1 vekil verildi",
+    .system1Title = "SÃSTEM 1: BATUHAN HAKKANÃYET MODELÃ",
+    .system1Subtitle1 = "ÃstediÃ°iniz vekil sayÃ½sÃ½: \t%d\nTaban olarak atanan vekil: \t%d",
+    .system1Subtitle2 = "Kalan %d vekil daÃ°Ã½tÃ½lÃ½yor...\n\n",
+    .securityAssign = "(GÃ¼venlik) Ãlk vekil en yÃ¼ksek nÃ¼fusa atanÃ½yor...\n",
+    .repAssigned = "%s ilÃ§esine +1 vekil verildi",
     .currentReps = " (Mevcut vekil: %d)\n",
 
-    .system2Title = "SİSTEM 2: SAF D'HONDT YÖNTEMİ (TÜRKİYE'DE GÜNCEL UYGULANAN YÖNTEM)",
-    .system2Subtitle = "Vekiller %d sayısına ulaşana kadar 0'dan başlayarak tek tek dağıtılıyor:\n\n",
-    .repNAssigned = "%d. vekil %s ilçesine verildi (Mevcut vekil: %d)\n",
+    .system2Title = "SÃSTEM 2: SAF D'HONDT YÃ–NTEMÃ (TÃœRKÃYE'DE GÃœNCEL UYGULANAN YÃ–NTEM)",
+    .system2Subtitle = "Vekiller %d sayÃ½sÃ½na ulaÃ¾ana kadar 0'dan baÃ¾layarak tek tek daÃ°Ã½tÃ½lÃ½yor:\n\n",
+    .repNAssigned = "%d. vekil %s ilÃ§esine verildi (Mevcut vekil: %d)\n",
 
-    .justiceTitle = "\n--- SİSTEM %d: Adalet Puanlaması ---\n",
-    .justiceRepRepresents = "İl genelinde bir vekil ortalama kaç kişiyi temsil ediyor? : \t%.0f\n",
-    .districtRepPower = "%-11s ilçesi Temsil Gücü: \t%.0f",
-    .personPerRep = " kişi/vekil \t(Ortalamadan %%%.2f sapma)\n",
-    .districtNoReps = "%-11s ilçesi hiç vekil alamadı.\n",
-    .systemJusticeScore = "\nSİSTEM %d - Genel Adaletsizlik Puanı (Ort. Yüzdesel Sapma): \t%% %.2f\n",
+    .justiceTitle = "\n--- SÃSTEM %d: Adalet PuanlamasÃ½ ---\n",
+    .justiceRepRepresents = "Ãl genelinde bir vekil ortalama kaÃ§ kiÃ¾iyi temsil ediyor? : \t%.0f\n",
+    .districtRepPower = "%-11s ilÃ§esi Temsil GÃ¼cÃ¼: \t%.0f",
+    .personPerRep = " kiÃ¾i/vekil \t(Ortalamadan %%%.2f sapma)\n",
+    .districtNoReps = "%-11s ilÃ§esi hiÃ§ vekil alamadÃ½.\n",
+    .systemJusticeScore = "\nSÃSTEM %d - Genel Adaletsizlik PuanÃ½ (Ort. YÃ¼zdesel Sapma): \t%% %.2f\n",
 
-    .finalComparisonTitle = "NİHAİ KARŞILAŞTIRMA (Düşük Puan Daha Az Sapma = Daha Adil)\n",
-    .system1Score = "SİSTEM 1 (Batuhan Hakkaniyet Modeli) Adaletsizlik Puanı: \t%% %.2f\n",
-    .system2Score = "SİSTEM 2 (Saf D'Hondt) Adaletsizlik Puanı: \t%% %.2f\n\n",
-    .resultEqual = "Sonuç: İki yöntem de eşit derecede adil bir sonuç üretmiştir.\n",
-    .resultSys1Better = "Sonuç: Batuhan Hakkaniyet Modeli, bu veri setinde Saf D'Hondt'tan daha adil bir sonuç üretmiştir.\n",
-    .resultSys2Better = "Sonuç: Saf D'Hondt Yöntemi, bu veri setinde Batuhan Hakkaniyet Modelinden daha adil bir sonuç üretmiştir.\n"
+    .finalComparisonTitle = "NÃHAÃ KARÃILAÃTIRMA (DÃ¼Ã¾Ã¼k Puan Daha Az Sapma = Daha Adil)\n",
+    .system1Score = "SÃSTEM 1 (Batuhan Hakkaniyet Modeli) Adaletsizlik PuanÃ½: \t%% %.2f\n",
+    .system2Score = "SÃSTEM 2 (Saf D'Hondt) Adaletsizlik PuanÃ½: \t%% %.2f\n\n",
+    .resultEqual = "SonuÃ§: Ãki yÃ¶ntem de eÃ¾it derecede adil bir sonuÃ§ Ã¼retmiÃ¾tir.\n",
+    .resultSys1Better = "SonuÃ§: Batuhan Hakkaniyet Modeli, bu veri setinde Saf D'Hondt'tan daha adil bir sonuÃ§ Ã¼retmiÃ¾tir.\n",
+    .resultSys2Better = "SonuÃ§: Saf D'Hondt YÃ¶ntemi, bu veri setinde Batuhan Hakkaniyet Modelinden daha adil bir sonuÃ§ Ã¼retmiÃ¾tir.\n"
 };
 
-// --- İNGİLİZCE METİNLER ---
+// --- ÃNGÃLÃZCE METÃNLER ---
 struct Strings EN = {
     .districtNames = {"Merkez", "Ciftlikkoy", "Cinarcik", "Altinova", "Armutlu", "Termal"},
 
@@ -134,7 +134,7 @@ struct Strings EN = {
 };
 
 
-// Adaletsizlik Puanını hesaplayan yardımcı fonksiyon
+// Adaletsizlik PuanÃ½nÃ½ hesaplayan yardÃ½mcÃ½ fonksiyon
 float calculate_adaletsizlik_puani(struct Strings* S, float nufus[], int vekil[], int vekilSayisi, float toplamNufus, int ilceSayisi, int sistemNo) {
 
     printf(S->justiceTitle, sistemNo);
@@ -156,7 +156,7 @@ float calculate_adaletsizlik_puani(struct Strings* S, float nufus[], int vekil[]
             toplamYuzdeselSapma += yuzdeselSapma;
         } else {
             printf(S->districtNoReps, S->districtNames[i]);
-            toplamYuzdeselSapma += 100.0; // Ceza puanı
+            toplamYuzdeselSapma += 100.0; // Ceza puanÃ½
         }
     }
 
@@ -173,11 +173,11 @@ int main()
     int langChoice;
     struct Strings* S;
 
-    // 1. Dil Seçimi
-    printf("Lütfen dil seçin / Please select language (1: Türkçe / 2: English): ");
+    // 1. Dil SeÃ§imi
+    printf("LÃ¼tfen dil seÃ§in / Please select language (1: TÃ¼rkÃ§e / 2: English): ");
     scanf("%d", &langChoice);
 
-    // 2. Metin İşaretçisini Ayarla
+    // 2. Metin ÃÃ¾aretÃ§isini Ayarla
     if (langChoice == 1) {
         S = &TR;
     } else {
@@ -214,14 +214,14 @@ int main()
     printf("%s", S->askForReps);
     scanf("%d", &teorikTop);
 
-    // İki sistem için de vekil dizileri
+    // Ãki sistem iÃ§in de vekil dizileri
     int vekilOrijinal[ilceSayisi];
     int vekilDh[ilceSayisi];
 
     int pratikTopOrijinal = 0;
 
     //*****************************************************
-    // TEMEL ATAMA: Sadece Orijinal Sistem için taban ataması yap
+    // TEMEL ATAMA: Sadece Orijinal Sistem iÃ§in taban atamasÃ½ yap
     //*****************************************************
     for(i=0; i<ilceSayisi; i++){
         int tabanVekil = teorikTop * (yuzde[i] / 100);
@@ -231,7 +231,7 @@ int main()
 
 
     //*****************************************************
-    // SISTEM 1: BATUHAN HAKKANİYET MODELİ (HATA PAYI HER ADIMDA HESAPLANAN)
+    // SISTEM 1: BATUHAN HAKKANÃYET MODELÃ (HATA PAYI HER ADIMDA HESAPLANAN)
     //*****************************************************
     printf("\n\n------------------------------\n");
     printf("%s\n", S->system1Title);
@@ -256,15 +256,15 @@ int main()
                 }
             }
         } else {
-            // Sizin normal hata payı hesaplamanız
-            // 1. O anki duruma göre hata paylarını hesapla
+            // Sizin normal hata payÃ½ hesaplamanÃ½z
+            // 1. O anki duruma gÃ¶re hata paylarÃ½nÃ½ hesapla
             for(i=0; i<ilceSayisi; i++){
                 teorikYuzde[i] = (float)vekilOrijinal[i] * 100.0 / (float)pratikTopOrijinal;
-                hataPayi[i] = teorikYuzde[i] - yuzde[i]; // Fiili Yüzde - İdeal Yüzde
+                hataPayi[i] = teorikYuzde[i] - yuzde[i]; // Fiili YÃ¼zde - Ãdeal YÃ¼zde
             }
 
-            // 2. En düşük hata payına (en mağdur) sahip ilçeyi bul
-            float minHata = 999.0; // Yüksek bir değerle başla
+            // 2. En dÃ¼Ã¾Ã¼k hata payÃ½na (en maÃ°dur) sahip ilÃ§eyi bul
+            float minHata = 999.0; // YÃ¼ksek bir deÃ°erle baÃ¾la
             for(i=0; i<ilceSayisi; i++){
                 if(hataPayi[i] < minHata){
                     minHata = hataPayi[i];
@@ -273,13 +273,13 @@ int main()
             }
         }
 
-        // 3. Vekili o ilçeye ata
+        // 3. Vekili o ilÃ§eye ata
         vekilOrijinal[minIndex]++;
         pratikTopOrijinal++;
-        printf(S->repAssigned, S->districtNames[minIndex]); // İlçe adı S'den geliyor
+        printf(S->repAssigned, S->districtNames[minIndex]); // ÃlÃ§e adÃ½ S'den geliyor
         printf(S->currentReps, vekilOrijinal[minIndex]);
     }
-    // Orijinal sistemin puanını hesapla (S parametresi eklendi)
+    // Orijinal sistemin puanÃ½nÃ½ hesapla (S parametresi eklendi)
     float puanOrijinal = calculate_adaletsizlik_puani(S, nufus, vekilOrijinal, teorikTop, toplam, ilceSayisi, 1);
 
 
@@ -291,19 +291,19 @@ int main()
     printf("------------------------------\n");
     printf(S->system2Subtitle, teorikTop);
 
-    // D'Hondt için vekil sayılarını sıfırla
+    // D'Hondt iÃ§in vekil sayÃ½larÃ½nÃ½ sÃ½fÃ½rla
     for(i=0; i<ilceSayisi; i++){
         vekilDh[i] = 0;
     }
 
     int k;
-    for(k=0; k < teorikTop; k++){ // Toplam vekil sayısı kadar (0'dan başlayarak) dön
+    for(k=0; k < teorikTop; k++){ // Toplam vekil sayÃ½sÃ½ kadar (0'dan baÃ¾layarak) dÃ¶n
 
         float maxOncelik = 0;
         int maxIndex = 0;
 
         for(i=0; i<ilceSayisi; i++){
-            // D'Hondt Böleni: Nüfus / (Alınan vekil + 1)
+            // D'Hondt BÃ¶leni: NÃ¼fus / (AlÃ½nan vekil + 1)
             float oncelikPuani = nufus[i] / (float)(vekilDh[i] + 1);
 
             if(oncelikPuani > maxOncelik){
@@ -312,11 +312,11 @@ int main()
             }
         }
 
-        // O anki en yüksek puana sahip ilçeye vekili ata
+        // O anki en yÃ¼ksek puana sahip ilÃ§eye vekili ata
         vekilDh[maxIndex]++;
-        printf(S->repNAssigned, k+1, S->districtNames[maxIndex], vekilDh[maxIndex]); // İlçe adı S'den geliyor
+        printf(S->repNAssigned, k+1, S->districtNames[maxIndex], vekilDh[maxIndex]); // ÃlÃ§e adÃ½ S'den geliyor
     }
-    // Saf D'Hondt sisteminin puanını hesapla (S parametresi eklendi)
+    // Saf D'Hondt sisteminin puanÃ½nÃ½ hesapla (S parametresi eklendi)
     float puanDh = calculate_adaletsizlik_puani(S, nufus, vekilDh, teorikTop, toplam, ilceSayisi, 2);
 
 
